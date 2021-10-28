@@ -1,27 +1,62 @@
-import React from 'react';
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import React, {useState} from 'react';
+import {Button,TextField,Switch,FormControlLabel} from "@material-ui/core";
+
 
 function FormularioCadastro() {
+const [nome,setNome] = useState("Ricardo");
 
 return(
-    <form>
-        <TextField id="nome" label="Nome" variant="outlined" margin ="normal" fullWidth/>
+<form  
+    onSubmit={(event)=>{
+        event.preventDefault();
+        console.log(nome)
+        } }
+ >
 
-        <TextField id="Sobrenome" label="Sobrenome" variant="outlined" margin ="normal" fullWidth/>
+        <TextField 
+        value={nome}
+        onChange={(event)=> {
+            setNome(event.target.value);
+            if(nome.length >= 3){
+                setNome (nome.substr(0,3));
+            }
         
-        <TextField id="CPF" label="CPF" variant="outlined" margin ="normal" fullWidth/>
+        }}
+            id="nome"
+            label="Nome" 
+            variant="outlined"
+            margin ="normal" 
+            fullWidth
+            />
 
-        <label>Promoções</label>
-        <input type="checkbox"/>
+        <TextField
+            id="Sobrenome"
+            label="Sobrenome"
+            variant="outlined"
+            margin ="normal" 
+            fullWidth
+            />
+            
+        <TextField 
+            id="CPF" 
+            label="CPF" 
+            variant="outlined" 
+            margin ="normal" 
+            fullWidth
+        />
 
-        <label>Novidades</label>
-        <input type="checkbox"/>
+    <FormControlLabel 
+    label="Promoções"
+    control={<Switch name="Promoções" defaultChecked="true" color="primary"/>}/>
 
+    <FormControlLabel 
+    label="Novidades"
+    control={<Switch name="Novidades" defaultChecked="true" color="primary"/>}/>
+        
         <Button type="submit" variant="contained" color="primary">
-            Cadastrar
+                Cadastrar
         </Button>
-    </form>
+</form>
     );
 }
 
