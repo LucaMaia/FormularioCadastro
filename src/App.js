@@ -1,22 +1,41 @@
-import React, {Component} from 'react';
-import './App.css';
-import FormularioCadastro from './components/FormularioCadastro/FormularioCadastro';
-import 'fontsource-roboto'
+import React, { Component } from 'react';
+import ListaDeNotas from './components/ListadeNotas';
+import FormularioCadastro from './components/FormularioCadastro';
+import "./assets/App.css";
+import "./assets/index.css";
 
-import {Container,Typography} from "@material-ui/core"
 
-class App extends Component{
+class App extends Component {
 
-  render(){
-    return (
-      <Container component="article" maxWidth="sm">
-        <Typography variant="h3" component="h1" align="center">Formulário Cadastro</Typography>
-        <FormularioCadastro/>
-      </Container>
-    
-  );
+
+  constructor(){
+    super();
+    this.notas = [];
+    this.state ={};
+  }
+
+criarNota(titulo,texto){
+  const novaNota = {titulo , texto};
+  this.notas.push(novaNota);
+  console.log(this.notas.length);
+  this.setState({
+    notas:this.notas
+  })
+ 
 }
-  
+
+
+
+ render() { 
+
+    return (
+      <section className="conteudo">
+        <FormularioCadastro criarNota={this.criarNota.bind(this)}/>
+        <ListaDeNotas notas={this.notas}/>
+      </section>
+   
+    );
+  }  
 }
 
 export default App;
